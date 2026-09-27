@@ -1,14 +1,42 @@
-const btn=document.getElementById("themeBtn");
-btn.onclick=()=>document.body.classList.toggle("light");
+// Dark / Light Mode Toggle
+const themeBtn = document.getElementById("themeBtn");
 
-const text="Building innovative digital experiences...";
-let i=0;
-const el=document.querySelector(".typing");
-setInterval(()=>{
- i=(i+1)%text.length;
-},500);
+themeBtn.addEventListener("click", () => {
+    document.body.classList.toggle("light");
 
-document.getElementById("form").onsubmit=e=>{
- e.preventDefault();
- alert("Message submitted successfully!");
-};
+    if(document.body.classList.contains("light")){
+        themeBtn.textContent = "☀";
+    }
+    else{
+        themeBtn.textContent = "☾";
+    }
+});
+
+
+// Contact Form Validation
+const form = document.getElementById("form");
+
+form.addEventListener("submit", function(event){
+
+    event.preventDefault();
+
+    const inputs = form.querySelectorAll("input, textarea");
+
+    let empty = false;
+
+    inputs.forEach(input => {
+        if(input.value.trim() === ""){
+            empty = true;
+        }
+    });
+
+
+    if(empty){
+        alert("Please complete all fields.");
+    }
+    else{
+        alert("Thank you! Your message has been submitted successfully.");
+        form.reset();
+    }
+
+});
